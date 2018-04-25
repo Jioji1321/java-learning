@@ -1,3 +1,5 @@
+//数据库（MySQL、Oracle）、http协议、JavaScript、排序算法、查找算法、spring、springMVC运行过程
+
 do - while 循环中，最后的while()后，必须有分号！！！！；；；；；！！！！！
 
 8      16      32        64   
@@ -63,6 +65,14 @@ static 静态
 用static关键字修饰的变量会变成保存在内存数据区共享变量
 这个空间只会创建一次，用于保存数据，可以供多个对象使用
 
+内存分区：栈区、堆区、代码区、数据区
+
+用static修饰和不用static修饰的区别
+	1.不用static修饰的是【非静态】成员变量，这个【非静态】成员变量是属于类对象的，是在类对象中保存某些数据
+	2.用static修饰的是【静态】成员变量，这个【静态】成员变量与类对象无关，是放在一个数据共享区中供多类使用
+
+	使用static可以节省数据所需要的空间，面向大量数据
+
 static 不单单能够修饰成员变量，也能修饰成员方法
 用static修饰的函数/方法，称之为静态函数/方法
 
@@ -106,9 +116,82 @@ static 不单单能够修饰成员变量，也能修饰成员方法
 
 根据数据库中存储的时间计算年龄 SELECT DATEDIFF(yy，‘出生日期‘, '当前时间')；
 
+
+
 jsp转发的方式：
 	转发：
 	重定向：
+
+
+
+
+
+
+
+
+
+Spring框架：
+	1.Spring的核心就是控制反转（IoC,Inversion of Control）和面向切面编程（AOP,Aspect Oriented Programming;OOP，面向对象编程）。
+	2.特点：
+		方便解耦，简化开发
+			可以将对象之间的以来关系交由Spring进行控制，避免硬编码所造成的过度程序耦合。
+		AOP编程的支持
+		声明式事务的支持
+		方便程序的测试
+		方便继承各种优秀的框架
+		降低JavaEE API的使用难度
+
+
+	3.Spring框架结构
+		DAO、ORM、JEE、AOP、CORE
+
+		CORE：核心组件，提供基本的功能，核心主要组件是BeanFactory，是工厂模式的实现。BeanFactory使用控制反转（IoC）模式将应用成熟的配置和依赖性规范与实际的应用程序代码分开
+
+		Spring上下文：一个配置文件，提供上下文信息
+
+		Spring AOP：Spring AOP模块为基于Spring的应用程序中的对象提供了事务管理服务，通过使用Spring AOP，不用依赖EJB组件，就可以将声明性事务集成到应用程序中
+
+		Spring DAO：
+
+		Spring ORM：
+
+		Spring Web模块：
+
+		SpringMVC框架：
+
+		spring的核心要点是：支持不绑定到特定J2EE服务的可充盈业务和数据访问对象。
+
+
+	4.Spring框架特征
+		轻量：Spring是非侵入式的：典型的，Spring应用中的对象不依赖于Spring的特定类
+
+
+		控制反转：促进低耦合不是对象从容器中寻找依赖，而是容器在对象初始化时不等对象请求就主动将依赖传递给他
+
+		面向切面：
+
+		容器：
+
+		框架：
+
+		MVC：
+
+
+	Spring IoC容器
+		Spring容器是框架核心，创建对象并将它们连接在一起，配置他们，管理他们的整个生命周期。这些对象就是SpringBeans。
+
+		spring提供了两种不同类型的容器：
+			Spring BeanFactory容器：
+				最简单的容器，给DI提供了基本的支持，使用org.springframework.beans.factory.BeanFactory接口来定义
+			Spring ApplicationContext容器：
+				添加更多企业特定的功能，使用org.springframework.context.ApplicationContext定义接口。
+
+		建议使用ApplicationContext，其包括BeanFactory容器中所有功能。
+
+	Spring的BeanFactory容器：
+		
+
+
 
 
 

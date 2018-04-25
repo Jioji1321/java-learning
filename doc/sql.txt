@@ -1,0 +1,424 @@
+insert 
+
+update
+
+delete
+
+select
+
+create
+
+alter table add（change、delete） 列
+
+drop
+
+truncate
+
+limit
+
+group by 列
+
+order by desc asc
+
+
+
+
+SELECT - 从数据库中提取数据
+UPDATE - 更新数据库中的数据
+DELETE - 从数据库中删除数据
+INSERT INTO - 向数据库中插入新数据
+CREATE DATABASE - 创建新数据库
+ALTER DATABASE - 修改数据库
+CREATE TABLE - 创建新表
+ALTER TABLE - 变更（改变）数据库表
+DROP TABLE - 删除表
+CREATE INDEX - 创建索引（搜索键）
+DROP INDEX - 删除索引
+
+SELECT:
+	SELECT column_name,column_name
+	FROM table_name;
+		与
+	SELECT * FROM table_name;
+
+	DISTINCT:(只选择出不同的数据)
+		SELECT DISTINCT column_name,column_name
+		FROM table_name;
+
+	WHERE：过滤条件
+		SELECT column_name,column_name
+		FROM table_name
+		WHERE column_name operator value;
+
+	WHERE 子句中的运算符
+		下面的运算符可以在 WHERE 子句中使用：
+
+		运算符	         描述
+		=	             等于
+		<>	             不等于。注释：在 SQL 的一些版本中，该操作符可被写成 !=
+		>	             大于
+		<	             小于
+		>=	             大于等于
+		<=	             小于等于
+		BETWEEN	         在某个范围内
+		LIKE	         搜索某种模式
+		IN	             指定针对某个列的多个可能值
+
+	SQL AND & OR 运算符
+		如果第一个条件和第二个条件都成立，则 AND 运算符显示一条记录。
+		如果第一个条件和第二个条件中只要有一个成立，则 OR 运算符显示一条记录。
+
+	SQL ORDER BY 语法
+		SELECT column_name,column_name
+		FROM table_name
+		ORDER BY column_name,column_name ASC|DESC;
+
+		ASC:升序
+		DESC:降序
+
+INSERT INTO 语句
+	INSERT INTO 语句用于向表中插入新记录。
+
+	SQL INSERT INTO 语法
+		INSERT INTO 语句可以有两种编写形式。
+
+		第一种形式无需指定要插入数据的列名，只需提供被插入的值即可：
+
+		INSERT INTO table_name
+		VALUES (value1,value2,value3,...);
+		第二种形式需要指定列名及被插入的值：
+
+		INSERT INTO table_name (column1,column2,column3,...)
+		VALUES (value1,value2,value3,...);
+
+UPDATE 语句
+	UPDATE 语句用于更新表中的记录。
+
+	SQL UPDATE 语句
+		UPDATE 语句用于更新表中已存在的记录。
+
+	SQL UPDATE 语法
+		UPDATE table_name
+		SET column1=value1,column2=value2,...
+		WHERE some_column=some_value;
+
+SQL DELETE 语句
+	DELETE 语句用于删除表中的记录。
+
+	SQL DELETE 语句
+		DELETE 语句用于删除表中的行。
+
+	SQL DELETE 语法
+		DELETE FROM table_name
+		WHERE some_column=some_value;
+
+
+SQL SELECT TOP 子句
+	SELECT TOP 子句用于规定要返回的记录的数目。
+
+	SELECT TOP 子句对于拥有数千条记录的大型表来说，是非常有用的。
+
+	注意:并非所有的数据库系统都支持 SELECT TOP 语句。 MySQL 支持 LIMIT 语句来选取指定的条数数据， Oracle 可以使用 ROWNUM 来选取。
+
+	SQL Server / MS Access 语法
+		SELECT TOP number|percent column_name(s)
+		FROM table_name;
+	MySQL 语法
+		SELECT column_name(s)
+		FROM table_name
+		LIMIT number;
+	实例
+		SELECT *
+		FROM Persons
+		LIMIT 5;
+	Oracle 语法
+		SELECT column_name(s)
+		FROM table_name
+		WHERE ROWNUM <= number;
+	实例
+		SELECT *
+		FROM Persons
+		WHERE ROWNUM <=5;
+
+	SQL SELECT TOP PERCENT 实例
+		在 Microsoft SQL Server 中还可以使用百分比作为参数。
+
+		下面的 SQL 语句从 websites 表中选取前面百分之 50 的记录：
+
+		实例
+			以下操作在 Microsoft SQL Server 数据库中可执行。
+
+			SELECT TOP 50 PERCENT * FROM Websites;
+
+
+SQL LIKE 操作符
+	LIKE 操作符用于在 WHERE 子句中搜索列中的指定模式。
+
+	SQL LIKE 操作符
+		LIKE 操作符用于在 WHERE 子句中搜索列中的指定模式。
+
+	SQL LIKE 语法
+		SELECT column_name(s)
+		FROM table_name
+		WHERE column_name LIKE pattern;
+
+	'%a'    //以a结尾的数据
+	'a%'    //以a开头的数据
+	'%a%'    //含有a的数据
+	'_a_'    //三位且中间字母是a的
+	'_a'    //两位且结尾字母是a的
+	'a_'    //两位且开头字母是a的
+
+	通过使用 NOT 关键字，您可以选取不匹配模式的记录。
+	下面的 SQL 语句选取 name 不包含模式 "oo" 的所有客户：
+	实例
+		SELECT * FROM Websites
+		WHERE name NOT LIKE '%oo%';
+
+
+SQL 通配符
+	通配符可用于替代字符串中的任何其他字符。
+
+	SQL 通配符
+	在 SQL 中，通配符与 SQL LIKE 操作符一起使用。
+
+	SQL 通配符用于搜索表中的数据。
+
+	在 SQL 中，可使用以下通配符：
+
+	通配符	            描述
+	%	          替代 0 个或多个字符
+	_	          替代一个字符
+	[charlist]	  字符列中的任何单一字符
+	[^charlist]
+	或            不在字符列中的任何单一字符
+	[!charlist]	 
+
+
+	MySQL 中使用 REGEXP 或 NOT REGEXP 运算符 (或 RLIKE 和 NOT RLIKE) 来操作正则表达式。
+
+		下面的 SQL 语句选取 name 以 "G"、"F" 或 "s" 开始的所有网站：
+			SELECT * FROM Websites
+			WHERE name REGEXP '^[GFs]';
+
+		下面的 SQL 语句选取 name 以 A 到 H 字母开头的网站：
+			SELECT * FROM Websites
+			WHERE name REGEXP '^[A-H]';
+
+		下面的 SQL 语句选取 name 不以 A 到 H 字母开头的网站：
+			SELECT * FROM Websites
+			WHERE name REGEXP '^[^A-H]';
+
+SQL IN 操作符
+	IN 操作符
+		IN 操作符允许您在 WHERE 子句中规定多个值。
+
+	SQL IN 语法
+		SELECT column_name(s)
+		FROM table_name
+		WHERE column_name IN (value1,value2,...);
+
+	下面的 SQL 语句选取 name 为 "Google" 或 "菜鸟教程" 的所有网站：
+		SELECT * FROM Websites
+		WHERE name IN ('Google','菜鸟教程');
+
+
+SQL BETWEEN 操作符
+	BETWEEN 操作符用于选取介于两个值之间的数据范围内的值。
+
+	SQL BETWEEN 操作符
+	BETWEEN 操作符选取介于两个值之间的数据范围内的值。这些值可以是数值、文本或者日期。
+
+	SQL BETWEEN 语法
+		SELECT column_name(s)
+		FROM table_name
+		WHERE column_name BETWEEN value1 AND value2;
+
+	下面的 SQL 语句选取 alexa 介于 1 和 20 之间的所有网站：
+		SELECT * FROM Websites
+		WHERE alexa BETWEEN 1 AND 20;
+
+
+SQL 别名
+	通过使用 SQL，可以为表名称或列名称指定别名。
+
+	基本上，创建别名是为了让列名称的可读性更强。
+
+	列的 SQL 别名语法
+		SELECT column_name AS alias_name
+		FROM table_name;
+	表的 SQL 别名语法
+		SELECT column_name(s)
+		FROM table_name AS alias_name;
+
+
+不同的 SQL JOIN
+	在我们继续讲解实例之前，我们先列出您可以使用的不同的 SQL JOIN 类型：
+
+	INNER JOIN：如果表中有至少一个匹配，则返回行
+	LEFT JOIN：即使右表中没有匹配，也从左表返回所有的行
+	RIGHT JOIN：即使左表中没有匹配，也从右表返回所有的行
+	FULL JOIN：只要其中一个表中存在匹配，则返回行
+
+SQL INNER JOIN 关键字
+	INNER JOIN 关键字在表中存在至少一个匹配时返回行。
+
+	SQL INNER JOIN 语法
+		SELECT column_name(s)
+		FROM table1
+		INNER JOIN table2
+		ON table1.column_name=table2.column_name;
+	或：
+
+		SELECT column_name(s)
+		FROM table1
+		JOIN table2
+		ON table1.column_name=table2.column_name;
+	注释：INNER JOIN 与 JOIN 是相同的。
+
+
+SQL LEFT JOIN 关键字
+	LEFT JOIN 关键字从左表（table1）返回所有的行，即使右表（table2）中没有匹配。如果右表中没有匹配，则结果为 NULL。
+
+	SQL LEFT JOIN 语法
+		SELECT column_name(s)
+		FROM table1
+		LEFT JOIN table2
+		ON table1.column_name=table2.column_name;
+		或：
+
+		SELECT column_name(s)
+		FROM table1
+		LEFT OUTER JOIN table2
+		ON table1.column_name=table2.column_name;
+	注释：在某些数据库中，LEFT JOIN 称为 LEFT OUTER JOIN。
+
+
+SQL RIGHT JOIN 关键字
+	RIGHT JOIN 关键字从右表（table2）返回所有的行，即使左表（table1）中没有匹配。如果左表中没有匹配，则结果为 NULL。
+
+	SQL RIGHT JOIN 语法
+		SELECT column_name(s)
+		FROM table1
+		RIGHT JOIN table2
+		ON table1.column_name=table2.column_name;
+		或：
+
+		SELECT column_name(s)
+		FROM table1
+		RIGHT OUTER JOIN table2
+		ON table1.column_name=table2.column_name;
+	注释：在某些数据库中，RIGHT JOIN 称为 RIGHT OUTER JOIN。
+
+
+SQL FULL OUTER JOIN 关键字
+	FULL OUTER JOIN 关键字只要左表（table1）和右表（table2）其中一个表中存在匹配，则返回行.
+
+	FULL OUTER JOIN 关键字结合了 LEFT JOIN 和 RIGHT JOIN 的结果。
+
+	SQL FULL OUTER JOIN 语法
+		SELECT column_name(s)
+		FROM table1
+		FULL OUTER JOIN table2
+		ON table1.column_name=table2.column_name;
+
+
+SQL UNION 操作符
+	SQL UNION 操作符合并两个或多个 SELECT 语句的结果。
+
+	SQL UNION 操作符
+	UNION 操作符用于合并两个或多个 SELECT 语句的结果集。
+
+	请注意，UNION 内部的每个 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每个 SELECT 语句中的列的顺序必须相同。
+
+	SQL UNION 语法
+		SELECT column_name(s) FROM table1
+		UNION
+		SELECT column_name(s) FROM table2;
+		注释：默认地，UNION 操作符选取不同的值。如果允许重复的值，请使用 UNION ALL。
+
+	SQL UNION ALL 语法
+		SELECT column_name(s) FROM table1
+		UNION ALL
+		SELECT column_name(s) FROM table2;
+		注释：UNION 结果集中的列名总是等于 UNION 中第一个 SELECT 语句中的列名。
+
+
+	注释：UNION 不能用于列出两个表中所有的country。如果一些网站和APP来自同一个国家，每个国家只会列出一次。UNION 只会选取不同的值。请使用 UNION ALL 来选取重复的值！
+
+
+
+SQL SELECT INTO 语句
+	通过 SQL，您可以从一个表复制信息到另一个表。
+
+	SELECT INTO 语句从一个表复制数据，然后把数据插入到另一个新表中。
+
+	SQL SELECT INTO 语句
+	SELECT INTO 语句从一个表复制数据，然后把数据插入到另一个新表中。
+
+	MySQL 数据库不支持 SELECT ... INTO 语句，但支持 INSERT INTO ... SELECT 。
+
+	当然你可以使用以下语句来拷贝表结构及数据：
+
+		CREATE TABLE 新表 SELECT * FROM 旧表 
+	
+	SQL SELECT INTO 语法
+	我们可以复制所有的列插入到新表中：
+
+	SELECT *
+	INTO newtable [IN externaldb]
+	FROM table1;
+	或者只复制希望的列插入到新表中：
+
+	SELECT column_name(s)
+	INTO newtable [IN externaldb]
+	FROM table1;
+	
+	提示：新表将会使用 SELECT 语句中定义的列名称和类型进行创建。您可以使用 AS 子句来应用新名称
+
+
+SQL 约束（Constraints）
+	SQL 约束用于规定表中的数据规则。
+
+	如果存在违反约束的数据行为，行为会被约束终止。
+
+	约束可以在创建表时规定（通过 CREATE TABLE 语句），或者在表创建之后规定（通过 ALTER TABLE 语句）。
+
+	SQL CREATE TABLE + CONSTRAINT 语法
+	CREATE TABLE table_name
+	(
+	column_name1 data_type(size) constraint_name,
+	column_name2 data_type(size) constraint_name,
+	column_name3 data_type(size) constraint_name,
+	....
+	);
+	
+	在 SQL 中，我们有如下约束：
+	NOT NULL - 指示某列不能存储 NULL 值。
+	UNIQUE - 保证某列的每行必须有唯一的值。
+	PRIMARY KEY - NOT NULL 和 UNIQUE 的结合。确保某列（或两个列多个列的结合）有唯一标识，有助于更容易更快速地找到表中的一个特定的记录。
+	FOREIGN KEY - 保证一个表中的数据匹配另一个表中的值的参照完整性。
+	CHECK - 保证列中的值符合指定的条件。
+	DEFAULT - 规定没有给列赋值时的默认值。
+	在下面的章节，我们会详细讲解每一种约束。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
