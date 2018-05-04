@@ -15,6 +15,11 @@ public class StringTest {
 		System.out.println(sb);
 		
 		
+		StringBuffer str2 = new StringBuffer(str1).reverse();
+		System.out.println(str2);
+		
+		String str3 = str2.toString();
+		System.out.println(str3 instanceof String);
 	}
 	
 	
