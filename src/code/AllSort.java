@@ -18,9 +18,9 @@ public class AllSort {
 		// System.out.println("冒泡排序：");
 		// outputArray(a);
 
-		insertSort(a);
-		System.out.println("插入排序：");
-		outputArray(a);
+		// insertSort(a);
+		// System.out.println("插入排序：");
+		// outputArray(a);
 
 		// shellSort(a);
 		// System.out.println("希尔排序：");
